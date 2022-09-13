@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% from 'macro.html' import links %}
+
+{% block title %} Jobs {% endblock %}
+
+{% block menu %}{{ links(user) }}{% endblock %}
+
+{% block section %}
+    <div class="promo__jobs">
+        <h1>Create Job</h1>
+        <form action="{{ url_for('jobs') }}" method="post">
+            <label for="">Job name
+                <select name="name">
+                    <option value="freelancer">freelancer</option>
+                    <option value="admin">admin</option>
+                    <option value="manager">manager</option>
+                </select>
+            </label>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+
+    {% for job in jobs %}
+
+        <form action="{{ url_for('change',job_id=job.id) }}" method="post">
+            <input type="text" name="job" value="{{ job.name }}">
+            <input type="submit" value="Edit">
+        </form>
+        <button><a href="{{ url_for('delete_job',job_id=job.id) }}">&cross;</a></button>
+    {% endfor %}
+
+{% endblock %}

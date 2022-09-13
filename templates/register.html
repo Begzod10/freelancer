@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% from 'macro.html' import  links %}
+{% block title %} Register stuff {% endblock %}
+
+{% block menu %}{{ links(user) }} {% endblock %}
+
+{% block section %}
+    <div class="promo__register">
+        <h1>Register Stuff</h1>
+        {% if error %}
+            <h2>{{ error }}</h2>
+        {% endif %}
+        <form action="{{ url_for('register') }}" method="post">
+            <input type="text" placeholder="username" name="username">
+            <input type="text" placeholder="name" name="name">
+            <input type="password" placeholder="password" name="password">
+            <select name="job" id="">
+                {% for job in jobs %}
+                    <option value="{{ job.id }}">{{ job.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+{% endblock %}

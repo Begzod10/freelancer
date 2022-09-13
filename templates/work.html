@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% from 'macro.html' import links %}
+
+{% block title %} Create work {% endblock %}
+
+{% block menu %}{{ links(user) }}{% endblock %}
+
+{% block section %}
+    <div class="promo__create_work">
+        <h1>Create work</h1>
+        {% if error %}
+            <h1>{{ error }}</h1>
+        {% endif %}
+        <form action="{{ url_for('create_work') }}" method="post">
+            <input type="text" placeholder="work name" name="work">
+            <label>Manager:
+                <select name="owner" id="">
+                    {% for job in users_list %}
+                        {% for nm in job.users %}
+                            <option value="{{ job.id }}">{{ nm.name }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+            </label>
+            <input type="submit" value="Create">
+        </form>
+        <ul>
+            {% for work in works %}
+
+                <li><a href="">{{ work.name }} / {{ work.user_work_id.name }}</a> {% if work.status %}&check;{% else %}&afr;{% endif %}</li>
+
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

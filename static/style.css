@@ -1,0 +1,13 @@
+* {
+  padding: 0;
+}
+
+header {
+  border-bottom: 2px solid black;
+}
+header ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*# sourceMappingURL=style.css.map */

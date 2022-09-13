@@ -1,0 +1,20 @@
+{% macro links(user) %}
+    <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        {% if not user %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        {% endif %}
+        {% if user and user.job.name == "admin" %}
+            <li><a href="{{ url_for('register') }}">Register stuff</a></li>
+        {% endif %}
+        {% if user and user.job and user.job.name %}
+            <li><a href="{{ url_for('groups') }}">Groups</a></li>
+        {% endif %}
+        {% if user and user.job and user.job.name == "admin" or user.job and user.job.name == "manager" %}
+            <li><a href="{{ url_for('create_work') }}">Works</a></li>
+        {% endif %}
+        {% if user %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% endif %}
+    </ul>
+{% endmacro %}
